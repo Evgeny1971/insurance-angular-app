@@ -1,0 +1,6 @@
+<div>
+  <p *ngIf="isApiUp; else apiDownMessage">API is up!</p>
+  <ng-template #apiDownMessage>
+    <p>API is down.</p>
+  </ng-template>
+</div>

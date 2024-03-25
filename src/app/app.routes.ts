@@ -1,21 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppHelloComponent } from './app.hello-component '; // Import AppHelloComponent
+import { UserListComponent } from './user-list/user-list.component';
 
-export const routes: Routes = [
-  { path: 'hello', component: AppHelloComponent }, // Define route for AppHelloComponent
+const routes: Routes = [
+  { path: 'users', component: UserListComponent }, // Define route for UserListComponent
+  { path: '', redirectTo: '/users', pathMatch: 'full' }, // Redirect to UserListComponent by default
   // Add other routes as needed
-  { path: '', redirectTo: '/hello', pathMatch: 'full' }, // Redirect to AppHelloComponent by default
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forRoot(routes)], // Use forRoot() for the root routing module
   exports: [RouterModule]
 })
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-
 export class AppRoutingModule { }

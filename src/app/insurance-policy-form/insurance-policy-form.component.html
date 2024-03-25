@@ -1,1 +1,9 @@
-<p>insurance-policy-form works!</p>
+<h2>Create Policy</h2>
+<form (ngSubmit)="createPolicy()">
+  <label>Policy Number: <input type="text" [(ngModel)]="policy.policyNumber" name="policyNumber"></label><br>
+  <label>Insurance Amount: <input type="number" [(ngModel)]="policy.insuranceAmount" name="insuranceAmount"></label><br>
+  <label>Start Date: <input type="date" [(ngModel)]="policy.startDate" name="startDate"></label><br>
+  <label>End Date: <input type="date" [(ngModel)]="policy.endDate" name="endDate"></label><br>
+  <label>User ID: <input type="number" [(ngModel)]="policy.userId" name="userId"></label><br>
+  <button type="submit">Create Policy</button>
+</form>

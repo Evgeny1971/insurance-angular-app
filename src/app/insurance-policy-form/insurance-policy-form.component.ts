@@ -1,40 +1,27 @@
-// create-insurance-policy.component.ts
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { InsurancePolicyService } from '../insurance-policy.service';
+import { InsurancePolicyService, InsurancePolicy } from '../insurance-policy.service';
 
 @Component({
-  selector: 'app-create-insurance-policy',
+  selector: 'app-create-policy',
   templateUrl: './insurance-policy-form.component.html',
   styleUrls: ['./insurance-policy-form.component.css']
 })
-export class CreateInsurancePolicyComponent {
+export class CreatePolicyComponent {
+  policy: InsurancePolicy = { id: 0, policyNumber: '', insuranceAmount: 0, startDate: new Date(), endDate: new Date(), userId: 0 };
 
-  insurancePolicyForm: FormGroup;
+  constructor(private userService: InsurancePolicyService) { }
 
-  constructor(private formBuilder: FormBuilder, private insurancePolicyService: InsurancePolicyService) {
-    this.insurancePolicyForm = this.formBuilder.group({
-      id: ['', Validators.required],
-      // Define other form fields here
+  createPolicy(): void {
+    this.userService.createInsurancePolicy(this.policy).subscribe({
+      next: () => {
+        console.log('Policy created successfully!');
+        // Optionally, perform any action after policy creation
+      },
+      error: (error) => {
+        console.error('Error occurred while creating policy:', error);
+        // Optionally, handle the error
+      }
     });
   }
-
-  onSubmit(): void {
-    if (this.insurancePolicyForm.invalid) {
-      return;
-    }
-
-    const formData = this.insurancePolicyForm.value;
-    this.insurancePolicyService.createInsurancePolicy(formData)
-      .subscribe(
-        response => {
-          console.log('Policy created successfully:', response);
-          // Handle success (e.g., show success message, navigate to another page)
-        },
-        error => {
-          console.error('Error creating policy:', error);
-          // Handle error (e.g., show error message)
-        }
-      );
-  }
 }
+

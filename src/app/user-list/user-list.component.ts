@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { InsuranceUserService, InsuranceUser } from '../user-details.service';
 
 @Component({
   selector: 'app-user-list',
@@ -7,6 +8,17 @@ import { Component } from '@angular/core';
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
-export class UserListComponent {
 
+export class UserListComponent implements OnInit {
+  users: InsuranceUser[] = [];
+
+  constructor(private userService: InsuranceUserService) { }
+
+  ngOnInit(): void {
+    this.getAllUsers();
+  }
+
+  getAllUsers(): void {
+    this.userService.getAllUSers().subscribe(users => this.users = users);
+  }
 }

@@ -20,7 +20,7 @@ export interface InsurancePolicy {
 })
 export class InsurancePolicyService {
 
-  private apiUrl = 'http://localhost:5000/InsurancePolicy';
+  private apiUrl = 'http://localhost:5000';
 
   constructor(private http: HttpClient) { }
 
